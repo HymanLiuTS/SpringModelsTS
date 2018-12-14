@@ -84,3 +84,29 @@ scope可选值：<br>
 | request        | 在一次Http请求中，每个Bean定义对应一个实例，该作用域仅在Spring MVC中才有效      |   
 | session        | 在一个Http Session请求中，每个Bean定义对应一个实例，该作用域仅在Spring MVC中才有效      |   
 
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 02InitAndDestoryBeanTS<br>
+* 定义创建和销毁单个Bean时调用的方法：<br>
+```xml
+ <bean id="hyman" class="codenest.InitAndDestoryBeanTS.Auditorium" init-method="turnOnLights" destroy-method="turnOffLights">
+  </bean>
+```
+* 定义默认的创建和销毁Bean调用的方法，在创建和销毁每个Bean时都会调用改方法：<br>
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="defaultTurnOnLights" default-destroy-method="defaultTurnOffLights">
+```
+* 实现InitializingBean和DisposableBean接口来定义创建和销毁Bean时调用的方法：
+```java
+public class Auditorium implements InitializingBean ,DisposableBean{
+
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("afterPropertiesSet:the lights has been turned on");
+	}
+
+	public void destroy() throws Exception {
+		System.out.println("destroy:the lights has been turned off");
+	}
+}
+```
