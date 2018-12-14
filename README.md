@@ -17,7 +17,7 @@
 ```
 　　3、调用有参构造函数创建，传入SpringBean作为参数：<br>
 ```xml
-  <bean id="sonnet29" class="codenest.BeanWithBeanFromConfigFile.Sonnet29">
+<bean id="sonnet29" class="codenest.BeanWithBeanFromConfigFile.Sonnet29">
   </bean>
   
   <bean id="hyman" class="codenest.BeanWithBeanFromConfigFile.PoeticJuggler">
