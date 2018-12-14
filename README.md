@@ -67,3 +67,20 @@ public class Stage {
 		juggler.perform();
 ```
 　　3、XmlWebApplicationContext ———— 从Web应用下的xml文件中装载上下文。
+
+* Bean的创建模式：<br> 
+　　利用配置文件创建的Bean在默认情况下是单例的，也就是说上下文getBean()得到的是同一个Bean对象，但是我们有时需要每次getBean时就得到一个新的对象，此时需要在<Bean>中设置其scope=“prototype”。
+```xml
+<bean id="hyman" class="cn.codenest.springmodelsts.BeadFromConfigFile.Juggler" scope="prototype">
+  	<constructor-arg value="15"></constructor-arg>
+  </bean>
+```
+scope可选值：<br>
+	
+| scope  | 定义 |  
+| --------   | -----   | 
+| singleton        | 在每一个Spring容器中，一个Bean定义一个对象实例（默认）      |  
+| prototype        | 允许Bean的定义可以被实例化任意次      |   
+| request        | 在一次Http请求中，每个Bean定义对应一个实例，该作用域仅在Spring MVC中才有效      |   
+| session        | 在一个Http Session请求中，每个Bean定义对应一个实例，该作用域仅在Spring MVC中才有效      |   
+
