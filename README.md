@@ -1,6 +1,7 @@
 # Spring相关使用模型<br>
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 01BeanFromConfigFile<br>
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 01BeanWithBeanFromConfigFile<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 01BeanByFactoryFromConfigFile<br>
 * 通过配置文件创建SpringBean对象时：<br>
 
 　　1、调用无参构造函数创建：
@@ -23,6 +24,32 @@
   <bean id="hyman" class="codenest.BeanWithBeanFromConfigFile.PoeticJuggler">
   	<constructor-arg value="15"></constructor-arg>
   	<constructor-arg ref="sonnet29"></constructor-arg>
+  </bean>
+```
+　　3、调用单例模式中类的静态工厂方法创建：<br>
+工厂方法：<br>
+```java
+public class Stage {
+	private Stage() {
+	}
+
+	private static class StageSingleonHolder {
+		static Stage instance = new Stage();
+	}
+
+	public static Stage getInstance() {
+		return StageSingleonHolder.instance;
+	}
+
+	public void perform() {
+		System.out.println("Hello World");
+	}
+}
+```
+配置文件：<br>
+```xml
+<bean id="hyman" class="codenest.BeanByFactoryFromConfigFile.Stage" factory-method="getInstance">
+  	
   </bean>
 ```
 * 加载配置文件的三种程序上下文：<br>
