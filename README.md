@@ -1,5 +1,6 @@
 # Spring相关使用模型<br>
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 01BeanFromConfigFile<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 01BeanWithBeanFromConfigFile<br>
 * 通过配置文件创建SpringBean对象时：<br>
 
 　　1、调用无参构造函数创建：
@@ -14,7 +15,16 @@
   	<constructor-arg value="15"></constructor-arg>
   </bean>
 ```
-
+　　3、调用有参构造函数创建，传入SpringBean作为参数：<br>
+```xml
+  <bean id="sonnet29" class="codenest.BeanWithBeanFromConfigFile.Sonnet29">
+  </bean>
+  
+  <bean id="hyman" class="codenest.BeanWithBeanFromConfigFile.PoeticJuggler">
+  	<constructor-arg value="15"></constructor-arg>
+  	<constructor-arg ref="sonnet29"></constructor-arg>
+  </bean>
+```
 * 加载配置文件的三种程序上下文：<br>
 
 　　1、加载文件系统路径上的配置文件：
