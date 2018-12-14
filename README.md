@@ -26,7 +26,7 @@
   	<constructor-arg ref="sonnet29"></constructor-arg>
   </bean>
 ```
-　　3、调用单例模式中类的静态工厂方法创建：<br>
+　　4、调用单例模式中类的静态工厂方法创建：<br>
 工厂方法：<br>
 ```java
 public class Stage {
