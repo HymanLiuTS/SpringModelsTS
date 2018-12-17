@@ -26,8 +26,6 @@
   	<constructor-arg ref="sonnet29"></constructor-arg>
   </bean>
 ```
-
-
 　　4、调用有参构造函数创建，使用内部Bean作为构造函数参数：<br>
 ```xml
  <bean id="hyman" class="codenest.BeanWithInnerBeanFromConfigFile.PoeticJuggler">
