@@ -25,6 +25,9 @@
   	<constructor-arg value="15"></constructor-arg>
   	<constructor-arg ref="sonnet29"></constructor-arg>
   </bean>
+```
+
+
 　　4、调用有参构造函数创建，使用内部Bean作为构造函数参数：<br>
 ```xml
  <bean id="hyman" class="codenest.BeanWithInnerBeanFromConfigFile.PoeticJuggler">
@@ -34,7 +37,8 @@
   	</constructor-arg>
   </bean>
 ```
-　　5、调用单例模式中类的静态工厂方法创建：<br>
+　　
+  5、调用单例模式中类的静态工厂方法创建：<br>
 工厂方法：<br>
 ```java
 public class Stage {
