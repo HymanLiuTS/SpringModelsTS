@@ -122,6 +122,7 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 ```
 
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 03BeanPropertyOfBaseType<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 04BeanPropertyFromP<br>
 * 通过<Property>标签注入Bean的属性
     * 需定义了属性的setter
     * 注入的属性可为基本类型（通过value设置）和Bean（通过ref引用）
@@ -137,4 +138,20 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 	</bean>
 
 </beans>	
+```
+
+* 通过命名空间p注入Bean的属性
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="saxphone" class="codenest.BeanPropertyFromP.Saxphone"></bean>
+	<bean id="hyman" class="codenest.BeanPropertyFromP.Instrumentalist"
+			p:song="Jungle Bells" 
+			p:instrument-ref="saxphone">
+
+	</bean>
+
+</beans>
 ```
