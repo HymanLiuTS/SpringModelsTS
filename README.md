@@ -199,3 +199,21 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 | key-ref        | 指定map中entry的键为上下文中其它bean的引用       |   
 | value        | 指定map中entry的值为String      |   
 | value-ref        | 指定map中entry的值为上下文中其它bean的引用      |   
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 05BeanPropertyOfProperties<br>
+* Properties和map类型的区别是前者的key和value都是Spring类型。
+* <props>元素用来定义一个Properties类型的集合值。
+* <prop>元素用来定义<props>集合的一个成员。
+* 使用<null/>为一个类属性装配null值。
+```xml
+<bean id="hyman" class="codenest.BeanPropertyOfProperties.Instrumentalist">
+		<!-- 指定属性为null值 -->
+		<property name="song"><null/></property>
+		<property name="instruments">
+			<props>
+				<prop key="guitar">DI</prop>
+				<prop key="saxphone">HOOP</prop>
+			</props>
+		</property>
+	</bean>
+```
