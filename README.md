@@ -192,6 +192,7 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 	</bean>	
 ```
 　　在<map>中<entry>元素由一个键和一个值组成，键和值可以是简单类型，也可以是对其它bean的引用，锁支持的属性如下表：<br>
+	
 | 属性  | 用途 |  
 | --------   | -----   | 
 | key        | 指定map中entry的键为String      |  
