@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="saxphone" class="codenest.BeanPropertyOfMap.Saxphone"></bean>
+	<bean id="guitar" class="codenest.BeanPropertyOfMap.Guitar"></bean>
+	<bean id="hyman" class="codenest.BeanPropertyOfMap.Instrumentalist">
+		<property name="song" value="Jingle Bells"></property>
+		<property name="instruments">
+			<map>
+				<entry key="guitar" value-ref="guitar"></entry>
+				<entry key="saxphone" value-ref="saxphone"></entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>
