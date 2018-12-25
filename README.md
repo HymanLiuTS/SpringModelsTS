@@ -175,3 +175,19 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 		</property>
 	</bean>	
 ```
+	
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 05BeanPropertyOfMap<br>
+* 装配Bean的map成员时，在配置文件中使用<map>
+```xml
+<bean id="saxphone" class="codenest.BeanPropertyOfMap.Saxphone"></bean>
+	<bean id="guitar" class="codenest.BeanPropertyOfMap.Guitar"></bean>
+	<bean id="hyman" class="codenest.BeanPropertyOfMap.Instrumentalist">
+		<property name="song" value="Jingle Bells"></property>
+		<property name="instruments">
+			<map>
+				<entry key="guitar" value-ref="guitar"></entry>
+				<entry key="saxphone" value-ref="saxphone"></entry>
+			</map>
+		</property>
+	</bean>	
+```
