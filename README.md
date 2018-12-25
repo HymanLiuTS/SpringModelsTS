@@ -155,3 +155,23 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 
 </beans>
 ```
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 05BeanPropertyOfCollection<br>
+* 装配Bean的Collection成员时，在配置文件中使用<list>或者<set>都可<br>
+```xml
+<bean id="saxphone" class="codenest.BeanPropertyOfCollection.Saxphone"></bean>
+	<bean id="guitar" class="codenest.BeanPropertyOfCollection.Guitar"></bean>
+	<bean id="hyman" class="codenest.BeanPropertyOfCollection.Instrumentalist">
+		<property name="song" value="Jingle Bells"></property>
+		<property name="instruments">
+<!-- 		<list>
+			<ref bean="saxphone"/>
+			<ref bean="guitar"/>
+		</list> -->
+		<set>
+			<ref bean="saxphone"/>
+			<ref bean="guitar"/>
+		</set>
+		</property>
+	</bean>	
+```
