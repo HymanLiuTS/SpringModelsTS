@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util.xsd ">
+
+	<bean id="other" class="codenest.SpEL2.Instrumentalist">
+		<property name="lastName" value="Liu"></property>
+		<property name="firstName" value="hyman"></property>
+		<property name="age" value="#{30}"></property>
+		<property name="email" value="879651072@qq.com"></property>
+	</bean>
+
+	<util:list id="cities">
+		<bean class="codenest.SpEL2.City" p:name="shenzhen" p:state="IL" p:population="2853114"/>
+		<bean class="codenest.SpEL2.City" p:name="shanghai" p:state="IL" p:population="1234568"/>
+		<bean class="codenest.SpEL2.City" p:name="beijing" p:state="IL" p:population="652315656"/>
+		<bean class="codenest.SpEL2.City" p:name="guangzhou" p:state="IL" p:population="26461788"/>
+	</util:list>
+	<util:map id="citymap">
+		<entry key="shenzhen">
+			<bean class="codenest.SpEL2.City" p:name="shenzhen" p:state="IL" p:population="2853114"/>
+		</entry>
+	</util:map>
+	<util:properties id="settings" location="classpath:settings.properties">
+	</util:properties>
+	
+	<bean id="hyman" class="codenest.SpEL2.Instrumentalist">
+		<property name="fullName" value="#{other.firstName +' ' + other.lastName}"></property>
+		<property name="age" value="#{other.age}"></property>
+		<property name="isAdult" value="#{other.age ge 18}"></property>
+		<property name="email" value="879651072@qq.com"></property>
+		<property name="validEmail"
+			value="#{other.email matches '^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$'}"></property>
+		<!-- <property name="city" value="#{cities[0]}"></property> -->
+		<!-- <property name="city" value="#{citymap['shenzhen']}"></property> -->
+		<property name="city" value="#{cities.^[population gt 10000000]}"></property>
+		<property name="driver" value="#{settings['db.driver']}"></property>
+		<property name="cityNames" value="#{cities.?[population gt 1000000].![name + ','+ state]}"></property>
+	</bean>
+</beans>
