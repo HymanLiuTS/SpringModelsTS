@@ -251,8 +251,69 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 ```xml
 <property name="isMan" value="#{other.age ge 18 and sex==1}"></property>
 ```
-* 使用条件表达式
+* 使用条件表达式，装配布尔量属性
 ```xml
 <property name="song" value="#{other.song!=null?other.song?'Jungle Bell'}"></property>
 ```
+* 使用正则表达式装配布尔量属性
+```xml
+<property name="validEmail"
+			value="#{other.email matches '^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$'}"></property>
+```
+3、在SpEL上筛选集合
+* 在xml中定义集合时需要引入命名空间util，引入方法如下：<br>
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util.xsd ">
+```
+* 定义list对象
+```xml
+<util:list id="cities">
+		<bean class="codenest.SpEL2.City" p:name="shenzhen" p:state="IL" p:population="2853114"/>
+		<bean class="codenest.SpEL2.City" p:name="shanghai" p:state="IL" p:population="1234568"/>
+		<bean class="codenest.SpEL2.City" p:name="beijing" p:state="IL" p:population="652315656"/>
+		<bean class="codenest.SpEL2.City" p:name="guangzhou" p:state="IL" p:population="26461788"/>
+</util:list>
+```
+* 定义map对象
+```xml
+<util:map id="citymap">
+		<entry key="shenzhen">
+			<bean class="codenest.SpEL2.City" p:name="shenzhen" p:state="IL" p:population="2853114"/>
+		</entry>
+</util:map>
+```
 	
+* 引入properties文件,如下，引入了类路径下的settings.properties文件
+```xml
+<util:properties id="settings" location="classpath:settings.properties">
+</util:properties>
+```
+settings.properties文件的内容类似下面
+```xml
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://192.168.8.32:3306/test
+db.username=root
+db.passwd=root
+```
+* 通过[]访问list中的成员
+```xml
+<property name="city" value="#{cities[0]}">
+```
+* 通过[]访问map中的成员
+```xml
+<property name="city" value="#{citymap['shenzhen']}"></property>
+```
+* 按照集合中对象的字段对集合中的对象进行过滤，得到一个新的集合，如下按照population对集合进行筛选,选中第一个人口数大于1000万的城市，类似的表达式还有.?[]选中所有符合条件的对象，.$[]选出最后一个符合条件的对象
+```xml
+<property name="city" value="#{cities.^[population gt 10000000]}"></property>
+```
+* 通过.![]对集合中的每个对象进行处理，并返回新的集合
+```xml
+<property name="cityNames" value="#{cities.?[population gt 1000000].![name + ','+ state]}"></property>
+```
