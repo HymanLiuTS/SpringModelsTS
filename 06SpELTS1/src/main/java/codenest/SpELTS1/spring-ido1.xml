@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="hyman" class="codenest.SpELTS1.Instrumentalist">
+		<property name="fullName" value="#{other.firstName +' ' + other.lastName}"></property>
+		<property name="age" value="#{other.age}"></property>
+		<property name="isAdult" value="#{other.age ge 18}"></property>
+		<property name="email" value="879651072@qq.com"></property>
+		<property name="validEmail" value="#{other.email matches '^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$'}"></property>
+	</bean>
+	<bean id="other" class="codenest.SpELTS1.Instrumentalist">
+		<property name="lastName" value="Liu"></property>
+		<property name="firstName" value="hyman"></property>
+		<property name="age" value="#{30}"></property>
+		<property name="email" value="879651072@qq.com"></property>
+	</bean>
+
+</beans>
