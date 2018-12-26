@@ -220,7 +220,7 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 06SpELTS<br>
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 06SpELTS1<br>
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 06SpELTS2<br>
-　　SpEL是Spring Expresion Language的简称，是在Spring配置xml中可以执行的简单语言，区别于之前静态地从配置文件中加载Bean或者装载Bean属性，SpEL实现了动态地加载Bean或者装载Bean属性。<br>
+　　SpEL是Spring Expresion Language的简称，是在Spring配置xml中可以执行的简单语言，区别于之前静态地从配置文件中加载Bean或者装载Bean属性，SpEL实现了动态地加载Bean或者装载Bean属性。<br><br>
 1、利用SpEL装载字面值<br>
 * 使用SpEl装载字符串、整形等普通变量
 ```xml
@@ -238,3 +238,12 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 ```xml
 <property name="age" value="#{T(java.lang.Math).random()}"></property>
 ```
+2、在SpEL的值上进行操作
+* 使用SpEL进行数值运算，other为另外一个bean，其支持的运算操作符包括：+、-、*、/、^
+```xml
+<property name="fullName" value="#{other.firstName +' ' + other.lastName}"></property>	
+```
+	
+	
+	
+	
