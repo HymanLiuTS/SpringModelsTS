@@ -243,7 +243,16 @@ public class Auditorium implements InitializingBean ,DisposableBean{
 ```xml
 <property name="fullName" value="#{other.firstName +' ' + other.lastName}"></property>	
 ```
-	
-	
-	
+* 使用SpEL进行关系运算，装配布尔量属性，other为另外一个bean，其支持的逻辑运算符包括eq（==）、lt（<）、le（<=）、gt（>）、ge（>=)。
+```xml
+<property name="isAdult" value="#{other.age ge 18}"></property>
+```
+* 使用逻辑表达式，装配布尔量属性，SpEL支持的逻辑表达式包括and、or、not、!
+```xml
+<property name="isMan" value="#{other.age ge 18 and sex==1}"></property>
+```
+* 使用条件表达式
+```xml
+<property name="song" value="#{other.song!=null?other.song?'Jungle Bell'}"></property>
+```
 	
