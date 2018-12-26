@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="tom" class="codenest.SpELTS.Instrumentalist">
+		<property name="song" value="Jingle Bells"></property>
+	</bean>
+	<bean id="hyman" class="codenest.SpELTS.Instrumentalist">
+		<!-- 采用SpEL传入字符串 -->
+		<property name="message" value="#{'hello'}"></property>
+		<!-- 使用SpEL调用对象的属性 -->
+		<!-- <property name="song" value="#{tom.song}"></property> -->
+		<!-- 使用SpEL调用对象的方法 -->
+		<property name="song" value="#{tom.getSong()?.toUpperCase()}"></property>
+
+		<property name="age" value="#{T(java.lang.Math).random()}"></property>
+	</bean>
+
+</beans>
