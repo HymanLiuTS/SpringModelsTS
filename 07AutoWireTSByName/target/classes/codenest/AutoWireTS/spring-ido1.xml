@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  
+  <bean id="poem" class="codenest.AutoWireTS.Sonnet29">
+  </bean>
+  <bean id="hyman" class="codenest.AutoWireTS.PoeticJuggler" autowire="byName">
+  </bean>
+</beans>
