@@ -317,3 +317,50 @@ db.passwd=root
 ```xml
 <property name="cityNames" value="#{cities.?[population gt 1000000].![name + ','+ state]}"></property>
 ```
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 07AutoWireTSByName<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 07AutoWireByTypeTS<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 07AotuWireContructorTS<br>
+* 设置按照属性名称自动装配属性<br>
+　　设置待装配属性bean的autowire为byName，此时装配该bean的属性时会从spring容器中查找id和该属性名成相同的bean进行装配。如下，hyman对象中有一个叫做poem的属性，此时会使用id为poem的bean进行装配。
+```xml
+<bean id="poem" class="codenest.AutoWireTS.Sonnet29">
+</bean>
+<bean id="hyman" class="codenest.AutoWireTS.PoeticJuggler" autowire="byName">
+</bean>
+```
+* 设置按照属性类型自动装配属性<br>
+　　设置待装配属性的bean的autowire为byType，此时装配该bean的属性时会从spring容器中查找和该属性类型相同的bean进行装配。如下，hyman对象中有一个叫做poem的属性，它的类型是Sonnet29，此时会使用类型为Sonnet29的bean进行装配，如果找到多个符合条件的类型，则抛出异常。
+```xml
+<!-- 设置按照类型自动装配 -->
+  <bean id="hyman" class="codenest.AutoWireByTypeTS.PoeticJuggler" autowire="byType">
+  </bean>
+```
+　　当有多个bean符合条件时，可以设置bean的优先级，如将其primary属性设置为true表示优先采用该bean进行装配，反之设为false则最后考虑使用其装配<br>
+```xml
+<!-- 设置primary为true，表示装配时选中该bean的优先级最高 -->
+  <bean id="poem" class="codenest.AutoWireByTypeTS.Sonnet29" primary="true">
+  </bean>
+  <!-- 设置primary为false，表示装配时选中该bean的优先级最低 -->
+  <bean id="poem2" class="codenest.AutoWireByTypeTS.Sonnet29" primary="false">
+  </bean>
+```
+　　此外，也可以通过设置bean的autowire-candidate属性为false，使得该bean不参与装配<br>
+```xml
+<!-- 设置autowire-candidate为false表示装配时该bean被排除 -->
+  <bean id="poem3" class="codenest.AutoWireByTypeTS.Sonnet29" autowire-candidate="false">
+  </bean>
+```
+* 设置bean按照构造函数自动装配
+　　将bean的autowire为constructor时，bean的<constructor-arg>元素将不再需要，Spring会按照类型或者类型寻找该构造函数的入参，如果发现有多个bean可作为该入参，或者找到的入参符合多个构造函数，都会出现编译错误。
+```xml
+ <bean id="hyman" class="codenest.AotuWireContructorTS.PoeticJuggler" autowire="constructor">
+  </bean>
+```
+* 设置文件中所有bean的默认自动装配类型
+　　配置beans标签的default-autowire属性，可以设置该beans下所有bean按照指定方式进行自动装配
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="constructor">
+```
