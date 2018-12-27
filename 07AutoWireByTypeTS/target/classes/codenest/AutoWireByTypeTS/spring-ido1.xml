@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- 设置primary为true，表示装配时选中该bean的优先级最高 -->
+  <bean id="poem" class="codenest.AutoWireByTypeTS.Sonnet29" primary="true">
+  </bean>
+  <!-- 设置primary为false，表示装配时选中该bean的优先级最低 -->
+  <bean id="poem2" class="codenest.AutoWireByTypeTS.Sonnet29" primary="false">
+  </bean>
+  <!-- 设置autowire-candidate为false表示装配时该bean被排除 -->
+  <bean id="poem3" class="codenest.AutoWireByTypeTS.Sonnet29" autowire-candidate="false">
+  </bean>
+  <!-- 设置按照类型自动装配 -->
+  <bean id="hyman" class="codenest.AutoWireByTypeTS.PoeticJuggler" autowire="byType">
+  </bean>
+</beans>
