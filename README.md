@@ -364,3 +364,79 @@ db.passwd=root
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-autowire="constructor">
 ```
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 08AutoWireByComment<br>
+一、利用@Autowired注解自动装配bean<br>
+使用@Autowired注解后，spring会byType去寻找合适的bean进行装配。
+* 命名空间的引入
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:annotation-config/>
+```
+* 装配到setter
+```java
+/*装配到setter*/
+@Autowired
+public void setInstrument(Instrument instrument) {
+	this.instrument = instrument;
+}
+```
+* 装配的构造函数
+```java
+/*在构造函数上自动装配*/
+@Autowired
+public Instrumentalist(Instrument instrument){
+	this.instrument = instrument;
+}
+```
+* 装配到属性上
+```java
+/*装配到setter*/
+@Autowired
+public void setInstrument(Instrument instrument) {
+	this.instrument = instrument;
+}
+```
+
+二、设置装配bean可选，若找不到合适的bean，设置属性为null<br>
+```java
+@Autowired(required=false)
+private Instrument instrument;
+```
+required为false表示若找不到bean，属性设置为null；为true表示找不到bean则抛出异常<br>
+
+三、限定选择bean<br>
+* 在使用@Autowired时指定选择某一个名称的bean
+```java
+@Autowired(required=false)
+@Qualifier("saxphone")
+private Instrument instrument;
+```
+上述代码，在进行自动装配时选择id为saxphone的bean进行装配，此时xml文件中如果有bean的id为saxphone就会被装配。
+```xml
+<bean id="saxphone" class="codenest.AutoWireByComment.Saxphone">
+</bean>
+```
+
+* 指定某一参加自动装配bean的范围<br>
+首先，在xml中未需要参与竞争装配的bean定义候选集名称
+```xml
+<bean id="saxphone" class="codenest.AutoWireByComment.Saxphone">
+   <qualifier value="saxphone1"/>
+</bean>
+<bean id="guitar" class="codenest.AutoWireByComment.Guitar">
+   <qualifier value="saxphone1"/>
+</bean>
+```
+然后，在使用@Autowired注解时，使用@Qualifier指定候选集的名称，这样spring就会优先从这些候选集中选择这些bean
+```java
+@Autowired(required=false)
+@Qualifier("saxphone")
+private Instrument instrument;
+```
