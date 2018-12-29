@@ -434,9 +434,46 @@ private Instrument instrument;
    <qualifier value="saxphone1"/>
 </bean>
 ```
+或者直接在对应的类上面使用该注解：<br>
+
+```java
+@Qualifier("saxphone1")
+public class Saxphone implements Instrument {	
+	public void play() {
+		System.out.println("TOOT");
+	}
+}
+
+```
 然后，在使用@Autowired注解时，使用@Qualifier指定候选集的名称，这样spring就会优先从这些候选集中选择这些bean
 ```java
 @Autowired(required=false)
 @Qualifier("saxphone")
+private Instrument instrument;
+```
+* 自定义候选集（Qualifier）
+我们自定义一个名叫做StreamedInstrument的候选集注解
+```java
+@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE })
+@Retention(RetentionPolicy.RUNTIME)
+@Qualifier
+public @interface StreamedInstrument {
+}
+```
+在对应的类中添加该候选集注解<br>
+```java
+@StreamedInstrument
+public class Guitar implements Instrument {
+	public void play() {
+		System.out.println("DIDI");
+	}
+}
+```
+
+在待装配的bean上，使用@Autowired时添加该注解：
+```java
+/*在属性上自动装配*/
+@Autowired(required=false)
+@StreamedInstrument
 private Instrument instrument;
 ```
