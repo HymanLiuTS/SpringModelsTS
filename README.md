@@ -477,3 +477,17 @@ public class Guitar implements Instrument {
 @StreamedInstrument
 private Instrument instrument;
 ```
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 09InjectTS<br>
+* @Inject注解的使用方法和Autowired基本一致，下面主要说明其不一致的使用方法之处：
+    * @Inject注解没有required属性，也就是说其所标注的依赖关系必须存在。
+    * @Inject指定名称注入的标签为@Named对应@Qualifier
+    * 使用@Inject时，可以在构造函数处注入一个Provider，Provider接口可以实现延迟注入以及注入Bean多个实例等许多自定义功能：
+```java
+@Inject
+public PoeticJuggler(Provider<Poem> poemProvider) {
+	this.poems = new HashSet<Poem>();
+	for(int i=0;i<6;i++) {
+		poems.add(poemProvider.get());
+	}
+}
+```
