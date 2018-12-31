@@ -491,3 +491,14 @@ public PoeticJuggler(Provider<Poem> poemProvider) {
 	}
 }
 ```
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 10ValueTS<br>
+* 使用Value注解可以注入基本类型的或者SpEL表达式
+```java
+
+@Value("5")
+private int max;
+
+@Value("#{instrument.sound}")
+private String sound;
+
+```
