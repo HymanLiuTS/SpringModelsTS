@@ -502,3 +502,85 @@ private int max;
 private String sound;
 
 ```
+
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 11ScanTS<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 11ScanTS2<br>
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 11CreateBeanByJava<br>
+一、 使用注解的方式自动检测Bean<br>
+　　为了减少xml的配置量，除了使用xml配置bean之外，我们还可以利用注解@Component自动再对应类上进行注解，spring会自动生成该类的的bean。首先需要在配置文件中配置需要生成bean的基础包base-package,spring会检查base-package下所有的注解了@Component的类：，将其生成bean<br>
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:annotation-config/>
+	<context:component-scan base-package="codenest.CreateBeanByJava">
+	</context:component-scan>
+</beans>
+```
+　　使用@Component注解时可以用@Component("guitar")的方式指定bean名称，如果没有指定bean名称默认生成的bean名称为该类类名的小写字母形式。<br>
+```java
+@Component("tom")
+public class Musician implements Singer {
+
+	public void show() {
+		System.out.print("Musican show ");
+	}
+
+}
+```
+　　其它使用特殊的注解还包括如下：<br>
+
+| 注解  | 用途 |  
+| --------   | -----   | 
+| @Component        | 标识该类被构造成bean      |  
+| @Controller       | 标识将该类定义为Spring MVC contrroller       |   
+| @Respository      | 标识将该类定义为数据仓库      |   
+| @Service        | 标识将该类定义为服务      |  
+
+二、使用过滤器自动生成bean
+　　上述方法，只有我们具有需要创建bean的class的源码时，在可以在源码上进行@Component注解，而通常情况下当我们拿到一个第三方的类，此时我们无法利用@Component注解进行类的自动生成，但是可以使用包含过滤器标签<context:include-filter/>来自动生成基础包下相关的类或者接口实现，使用排除过滤器<context:include-filter/>来排除基础包下相关的类或者的接口实现：<br>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:annotation-config/>
+	<context:component-scan base-package="codenest.ScanTS">
+		<context:include-filter type="assignable" expression="codenest.ScanTS.Instruclist"/>
+		<context:include-filter type="assignable" expression="codenest.ScanTS.Instrument"/>
+		<context:include-filter type="assignable" expression="codenest.ScanTS.Singer"/>
+	</context:component-scan>
+</beans>
+```
+　　如上面的例子，我们定义了基础包为codenest.ScanTS，并定义了3个包含过滤器，该基础包下所有Instrument和Singer的接口实现以及Instruclist类都将被创建成bean。
+　　过滤器标签中的type属性表示的是过滤器的类型，assignable表明过滤器自动创建所有派生于expression指定的类，此外还有多种过滤器类型：<br>
+  
+| 过滤器类型  | 用途 |  
+| --------   | -----   | 
+| annotation        | 创建指定注解标注的类的bean，使用expression指定的注解      |  
+| assignable      | 创建所有派生于expression指定的类的bean       |   
+| aspectj      | 创建expression属性所指定的AspectJ表达式所匹配的类的bean      |   
+| custom        | 创建自定义的org.springframework.core.type.TypeFilter实现类的bean，该类由expression属性指定      |  
+| regex        | 创建于类名称符合expression指定的正则表达式的类的bean     |  
+
+
+
+
+
+
+
+
+
+
+
+
+
