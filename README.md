@@ -572,8 +572,46 @@ public class Musician implements Singer {
 | custom        | 创建自定义的org.springframework.core.type.TypeFilter实现类的bean，该类由expression属性指定      |  
 | regex        | 创建于类名称符合expression指定的正则表达式的类的bean     |  
 
+三、使用Java代码定义Bean<br>
+　　为了进一步减少xml的配置bean的繁琐，spring还支持使用java代码代替xml来定义bean，首先还需要一个简单的xml来设置基础包：<br>
+  ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:annotation-config/>
+	<context:component-scan base-package="codenest.CreateBeanByJava">
+	</context:component-scan>
+</beans>
 
+  ```
+　　我们在一个java类上使用@Configuration注解，即可表明使用该类来定义相关bean，相当于之前xml文件的<beans>标签：
+```java
+@Configuration
+public class SpringIdoConfig {
+}
+```
+　　我们以方法的方式在上述类中创建bean，每个方法名就是bean的名称，每个方法上使用@Bean注解，相当于xml文件中的<bean>标签：
+```java
+@Configuration
+public class SpringIdoConfig {
 
+	@Bean
+	public  Sonnet29 snet() {
+		return new Sonnet29();
+	}
+	
+	@Bean
+	public PoeticJuggler hyman() {
+		return new PoeticJuggler(15,snet());
+	}
+}
+
+```
 
 
 
