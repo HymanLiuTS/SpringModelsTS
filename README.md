@@ -613,10 +613,87 @@ public class SpringIdoConfig {
 
 ```
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 12AOPTs<br>
-　　AOP（面向切面的编程）的提出是为了解耦通用的服务功能如日志服务与业务功能，面向切面的本质其实就是使用代理封装相关的类对象，利用代理调用对象的方法，可以设置在调用相关方法前后进行相应的操作，设置为该对象增加功能方法。Spring AOP中主要有以下几个概念：<br>
-　　　　
-  (1)切点（<aop:pointcut>）:调用目标对象的方法。
-    
+　　AOP（面向切面的编程）的提出是为了解耦通用的服务功能如日志服务与业务功能，面向切面的本质其实就是使用代理封装相关的类对象，利用代理调用对象的方法，可以设置在调用相关方法前后进行相应的操作，甚至为该对象增加功能方法。Spring AOP中主要有以下几个概念：<br>
+　　（1）连接点：所有可以调用的目标对象的方法。<br>
+　　（2）切点（<aop:pointcut>）:调用目标对象的方法。<br>
+ 　　(3) 通知：定义在方法调用前、后调用哪个通用服务的方法。<br>
+ 　　(4) 切面（<aop:aspect>）:所有切点和通知加在一起叫做一个切面。<br>
+* 声明切面相关的命名空间：
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+```
+* 声明一个切面
+```xml
+<bean id="audience" class="codenest.AOPTs.Audience">
+	</bean>
+<aop:config>
+		<aop:aspect ref="audience">
+			<aop:before pointcut="execution(* codenest.AOPTs.Performer.perform(..))"
+				method="takeSeats" />
+			<aop:before pointcut="execution(* codenest.AOPTs.Performer.perform(..))"
+				method="takeOffCellPhones" />
+			<aop:after-returning pointcut="execution(* codenest.AOPTs.Performer.perform(..))"
+				method="applaud" />
+			<aop:after-throwing pointcut="execution(* codenest.AOPTs.Performer.perform(..))"
+				method="demandRefund" />
+		</aop:aspect>
+</aop:config>
+```
+　　如上代码，标签aop:aspect声明了一个切面，ref中引用的是AOP中通用服务类的bean，<aop:before>、<aop:after-returning>、<aop:after-throwing>表示定义了三种通知，分别在pointcut中指定的方法调用前、调用后、发生异常时进行调用。
+
+* 单独提取出切入点<br>
+　　上面的配置中，为每个通知都定义了一样的切入点，显然存在代码冗余，我们可以将切入点提取出来，再在每个通知上分别引用：
+```xml
+<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut expression="execution(* codenest.AOPTs.Performer.perform(..))" id="performance"/>
+			<aop:before pointcut-ref="performance"
+				method="takeSeats" />
+			<aop:before pointcut-ref="performance"
+				method="takeOffCellPhones" />
+			<aop:after-returning pointcut-ref="performance"
+				method="applaud" />
+			<aop:after-throwing pointcut-ref="performance"
+				method="demandRefund" />
+		</aop:aspect>
+</aop:config> 
+```
+
+* 环绕通知
+　　以上我们分别定义了三种通知：<aop:before>、<aop:after-returning>、<aop:after-throwing>，每种通知都有一个单独的服务方法的调用，因为方法不同，这使得三种方法之间共享数据有了问题，只能把需要共享的数据定义成一个服务类的成员，但是这样又会出现并发访问的问题。针对这一情况，提出了环绕通知的概念，目标方法调用前后所有操作都在一个通知方法中实现。首先我们定义该通知方法：
+```java
+public void watchPerformance(ProceedingJoinPoint joinPoint) {
+
+		try {
+			System.out.println("the audience is taking their seats");
+			System.out.println("the audience is turning Off their cellphones");
+			long start = System.currentTimeMillis();
+			joinPoint.proceed();
+			long end = System.currentTimeMillis();
+			System.out.println("CLAP CLAP CLAP CLAP");
+			System.out.println("The performence took " + (end - start) + " millionseconds");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			System.out.println("We want our money back");
+		}
+
+	}
+```
+　　我们注意到该方法只有一个类型为ProceedingJoinPoint的参数，该参数包含了要调用的目标方法的信息。joinPoint.proceed()就是再调用目标方法，所以以该句代码划分，上面为调用前相关操作，下面为调用后相关操作。对应的xml的声明方法如下：
+```xml
+<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut expression="execution(* codenest.AOPTs.Performer.perform(..))" id="performance"/>
+			<aop:around pointcut-ref="performance"
+				method="watchPerformance" />
+		</aop:aspect>
+</aop:config>
+```
 
 
 
