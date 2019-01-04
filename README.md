@@ -695,7 +695,19 @@ public void watchPerformance(ProceedingJoinPoint joinPoint) {
 </aop:config>
 ```
 
-
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 12AOPTs2<br>
+　　有时再调用切入点的方法前，我们可能需要对该方法的参数进行检查，比如一些安全性的检查，此时我们就需要再服务类的方法中增加参数，如下：
+```java
+<aop:config>
+		<aop:aspect ref="magician">
+			<aop:pointcut expression="execution(* codenest.AOPTs2.Thinker.thinkOfSomething(codenest.AOPTs2.Message)) and args(thoughts)" id="thinking"/>
+			<aop:before pointcut-ref="thinking"
+				method="interceptThoughts" 
+				arg-names="thoughts"/>
+		</aop:aspect>
+	</aop:config>
+```
+  可以看到再切入点的expression字段中我们定义的方法增加了一个类型为codenest.AOPTs2.Message的参数类型，这是我们自定义的一个类型，包含需要传递的数据，后面的and链接了一个args ，和前面的方法名组成了一个搜索条件，spring会根据该条件查找正确的方法。而在通知的定义中，method指定了需要调用的方法，而arg-names指定了该方法需要传递的参数名称，该名称需要和pointcut中的args指定的参数名称一致，但是不需要和java中定义的方法中参数名称一致。
 
 
 
