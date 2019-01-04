@@ -4,9 +4,9 @@ public class Magician implements MindReader {
 
 	private String thoughts;
 
-	public void interceptThoughts(String thoughts) {
+	public void interceptThoughts(Message message) {
 		System.out.println("Intercepting volunteer's thoughts");
-		this.thoughts = thoughts;
+		this.thoughts = message.getContent();
 	}
 
 	public String getThoughts() {

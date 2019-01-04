@@ -7,8 +7,8 @@ public class Volunteer implements Thinker {
 
 	private String thoughts;
 
-	public void thinkOfSomething(String thoughts) {
-		this.thoughts = thoughts;
+	public void thinkOfSomething(Message message) {
+		this.thoughts = message.getContent();
 	}
 
 	public String getThoughts() {

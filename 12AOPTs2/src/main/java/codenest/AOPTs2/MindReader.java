@@ -1,6 +1,6 @@
 package codenest.AOPTs2;
 
 public interface MindReader {
-	void interceptThoughts(String thoughts);
+	void interceptThoughts(Message thoughts);
 	String getThoughts();
 }
