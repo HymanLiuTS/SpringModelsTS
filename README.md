@@ -707,9 +707,62 @@ public void watchPerformance(ProceedingJoinPoint joinPoint) {
 		</aop:aspect>
 	</aop:config>
 ```
-  可以看到再切入点的expression字段中我们定义的方法增加了一个类型为codenest.AOPTs2.Message的参数类型，这是我们自定义的一个类型，包含需要传递的数据，后面的and链接了一个args ，和前面的方法名组成了一个搜索条件，spring会根据该条件查找正确的方法。而在通知的定义中，method指定了需要调用的方法，而arg-names指定了该方法需要传递的参数名称，该名称需要和pointcut中的args指定的参数名称一致，但是不需要和java中定义的方法中参数名称一致。
+　　可以看到再切入点的expression字段中我们定义的方法增加了一个类型为codenest.AOPTs2.Message的参数类型，这是我们自定义的一个类型，包含需要传递的数据，后面的and链接了一个args ，和前面的方法名组成了一个搜索条件，spring会根据该条件查找正确的方法。而在通知的定义中，method指定了需要调用的方法，而arg-names指定了该方法需要传递的参数名称，该名称需要和pointcut中的args指定的参数名称一致，但是不需要和java中定义的方法中参数名称一致。
+  
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 12AOPTs３<br>
+　　Spring AOP还有一个功能：是为一个类，在不改变其代码的前提下，为其新增方法。这当然也是代理的作用，为此先声明一个目标类：
+  ```java
+public interface Singler {
+	void sing();
+}
+public class Performer implements Singler {
 
+	public void sing() {
+		System.out.println("melody");
+	}
 
+}
+  ```
+　　我们定义了Dancer的接口，并完成其一个实现Terpsichorean，接下来要做的工作就是将Dancer的所有方法都添加到Performer类中：
+```java
+public interface Dancer {
+	void dance();
+}
+
+public class Terpsichorean implements Dancer {
+
+	public void dance() {
+		System.out.println("QIA QIA QIA");
+	}
+
+}
+```
+　　接下来，在xml中这样配置：
+```xml
+<bean id="hyman" class="codenest.AOPTs3.Performer">
+	</bean>
+	<bean id="dancer" class="codenest.AOPTs3.Terpsichorean">
+	</bean>
+	<aop:config>
+		<aop:aspect>
+			<aop:declare-parents 
+			types-matching="codenest.AOPTs3.Performer" 
+			implement-interface="codenest.AOPTs3.Dancer"
+			delegate-ref="dancer"/>
+		</aop:aspect>
+	</aop:config>
+```
+　　重点关注aop切面的设置，发现它添加了一个<aop:declare-parents>，该标签用来给目标类添加新的接口，types-matching指定目标类名称，implement-interface指定要添加的接口，delegate-ref是上述接口的一个实现，这里用delegate-ref引用了上面的一个bean，还可以使用default-impl来指定类名称：
+```xml
+<aop:config>
+		<aop:aspect>
+			<aop:declare-parents 
+			types-matching="codenest.AOPTs3.Performer" 
+			implement-interface="codenest.AOPTs3.Dancer"
+			default-impl="codenest.AOPTs3.Terpsichorean"/>
+		</aop:aspect>
+</aop:config>
+```
 
 
 
