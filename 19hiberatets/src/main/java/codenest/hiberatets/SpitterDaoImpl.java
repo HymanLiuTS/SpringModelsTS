@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 public class SpitterDaoImpl extends HibernateDaoSupport implements SpitterDao {
 
-	
-			
 	public void save(Spitter spitter) {
 		Session session = this.getHibernateTemplate().getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
 		session.save(spitter);
+		tx.commit();
+		session.close();
 	}
 
 	public void update(Spitter spitter) {

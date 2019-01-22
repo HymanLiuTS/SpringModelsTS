@@ -18,7 +18,7 @@ public class App
     	AbstractApplicationContext  ctx = new ClassPathXmlApplicationContext("codenest/hiberatets/BeanLocations.xml");
     	SpitterDao stage = (SpitterDao) ctx.getBean("spitterDaoImpl");
     	Spitter spitter=new Spitter();
-    	spitter.setId(123);
+    	spitter.setId(12);
     	spitter.setName("tom");
     	spitter.setEmail("12@qq.com");
     	stage.save(spitter);
