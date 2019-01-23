@@ -1,6 +1,6 @@
-package codenest.hiberatets;
+package codenest.hiberatets.model;
 
-public class Spitter {
+public class Spitter{
 	private int id;
 
 	private String name;
@@ -31,4 +31,7 @@ public class Spitter {
 		this.email = email;
 	}
 
+	public String toString() {
+		return String.format("id=%d,name=%s,emai=%s", id, name, email);
+	}
 }
