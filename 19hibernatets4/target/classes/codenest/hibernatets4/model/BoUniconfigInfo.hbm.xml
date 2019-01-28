@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-1-28 10:58:33 by Hibernate Tools 5.3.0.Beta2 -->
+<hibernate-mapping package="codenest.hibernatets4.model">
+
+<class
+    name="BoUniconfigInfo"
+    table="bo_uniconfig_info"
+    schema="public"
+>
+
+	<id 
+        name="id"
+        type="int"
+    >
+    
+<column name="id" />
+	    <generator class="identity" />
+    </id>
+
+
+
+    <version
+        name="version"
+        type="java.lang.Integer"
+    >
+<column name="version" />
+	</version>
+
+
+    <property
+        name="classid"
+	    type="int"
+    >
+<column name="classid" not-null="true" />
+  </property>
+
+    <property
+        name="ext"
+	    type="string"
+    >
+<column name="ext" />
+  </property>
+
+    <property
+        name="logtime"
+	    type="timestamp"
+    >
+<column name="logtime" length="29" />
+  </property>
+
+    <property
+        name="modifytime"
+	    type="timestamp"
+    >
+<column name="modifytime" length="29" />
+  </property>
+
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-1-28 10:58:33 by Hibernate Tools 5.3.0.Beta2 -->
+<hibernate-mapping>
+
+<class
+    name="BoUniconfigKeywordInfo"
+    table="bo_uniconfig_keyword_info"
+    schema="public"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="keywordid"
+        type="int"
+    >
+    
+<column name="keywordid" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <many-to-one
+	    name="boUniconfigType"
+	    class="BoUniconfigType"
+	    
+        fetch="select"
+    >
+<column name="classid" not-null="true" />
+   </many-to-one>
+    <property
+        name="keyword"
+	    type="string"
+    >
+<column name="keyword" length="50" not-null="true" />
+  </property>
+
+    <property
+        name="show"
+	    type="string"
+    >
+<column name="show" length="50" not-null="true" />
+  </property>
+
+    <property
+        name="type"
+	    type="string"
+    >
+<column name="type" />
+  </property>
+
+
+	<set name="boUniconfigKeywordEnums"
+table="bo_uniconfig_keyword_enum"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="keywordid" not-null="true" />
+		</key>
+<one-to-many class="BoUniconfigKeywordEnum"
+/>
+	</set>
+
+</class>
+
+</hibernate-mapping>

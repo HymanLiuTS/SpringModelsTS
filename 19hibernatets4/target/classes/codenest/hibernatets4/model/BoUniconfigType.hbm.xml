@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-1-28 10:58:33 by Hibernate Tools 5.3.0.Beta2 -->
+<hibernate-mapping>
+
+<class
+    name="BoUniconfigType"
+    table="bo_uniconfig_type"
+    schema="public"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="classid"
+        type="int"
+    >
+    
+<column name="classid" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <property
+        name="productid"
+	    type="int"
+    >
+<column name="productid" not-null="true" />
+  </property>
+
+    <property
+        name="uniconfigname"
+	    type="string"
+    >
+<column name="uniconfigname" length="50" not-null="true" />
+  </property>
+
+    <property
+        name="uniconfigkey"
+	    type="string"
+    >
+<column name="uniconfigkey" length="50" not-null="true" />
+  </property>
+
+
+	<set name="boUniconfigKeywordInfos"
+table="bo_uniconfig_keyword_info"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="classid" not-null="true" />
+		</key>
+<one-to-many class="BoUniconfigKeywordInfo"
+/>
+	</set>
+
+</class>
+
+</hibernate-mapping>

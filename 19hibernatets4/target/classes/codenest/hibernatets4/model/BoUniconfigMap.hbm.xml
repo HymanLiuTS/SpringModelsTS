@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-1-28 10:58:33 by Hibernate Tools 5.3.0.Beta2 -->
+<hibernate-mapping>
+
+<class
+    name="BoUniconfigMap"
+    table="bo_uniconfig_map"
+    schema="public"
+    optimistic-lock="version"
+>
+
+    <composite-id
+		name="id"
+        class="BoUniconfigMapId"
+    >		
+	        <key-property name="nodetype" type="int">
+<column name="nodetype" />
+	        </key-property>
+	        <key-property name="nodeid" type="int">
+<column name="nodeid" />
+	        </key-property>
+    </composite-id>	
+
+
+
+
+    <property
+        name="keyid"
+	    type="int"
+    >
+<column name="keyid" not-null="true" />
+  </property>
+
+
+</class>
+
+</hibernate-mapping>
