@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.username">postgres</property>
+		<!-- 数据库用户名 -->
+		<property name="connection.password">123456</property>
+		<!-- 数据库密码 -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<!-- 数据库驱动 -->
+		<!-- 数据库链接 -->
+		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/test</property>
+		<!-- 表示数据库的方言，对数据库的语言结构进行优化 -->
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<!-- 是否把要执行的语句输出到控制台 -->
+		<property name="show_sql">true</property>
+		<!-- 是否对要执行的语句格式化 -->
+		<property name="format_sql">true</property>
+		<!-- 生成表结构的策略，create表示删除原表重新生成，update表示更新原表 -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- 给数据库中的所有表加上前缀 -->
+		<!-- <property name="hibernate.default_schema">hibernate</property> -->
+		<!-- getCurrentSession方法创建session要用到的属性 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+		<mapping
+			resource="codenest/hibernate5/domain/Customer.hbm.xml" />
+		<mapping resource="codenest/hibernate5/domain/Myorder.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

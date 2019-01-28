@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-1-28 15:55:01 by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="codenest.hibernate5.domain"  auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="Myorder" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="myorder">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="Customer" embed-xml="true" fetch="select" insert="true" name="customer" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="customer_id"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="ordernum" optimistic-lock="true" type="string" unique="false">
+            <column name="ordernum" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="money" optimistic-lock="true" type="java.lang.Double" unique="false">
+            <column name="money" precision="17" scale="17"/>
+        </property>
+    </class>
+</hibernate-mapping>
