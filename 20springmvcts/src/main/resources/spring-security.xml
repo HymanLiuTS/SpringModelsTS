@@ -8,18 +8,23 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 	
 	<http auto-config="false" use-expressions="true">
-		<form-login />
 		<http-basic />
 		<logout />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/home" access="permitAll" />
+        <intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
+        <form-login  login-page="/login" username-parameter="ssoId" password-parameter="password" authentication-failure-url="/Access_Denied" />
+        <csrf/>
 	</http>
 	
 	  <authentication-manager>
         <!-- 可提供登录访问的用户 -->
         <authentication-provider> 
 	        <user-service>
-	            <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" /> 
-	            <user name="security" password="security" authorities="ROLE_USER" /> 
+	            <user name="bill"  password="abc123"  authorities="ROLE_USER" />
+                <user name="admin" password="root123" authorities="ROLE_ADMIN" />
+                <user name="dba"   password="root123" authorities="ROLE_ADMIN,ROLE_DBA" />
 	        </user-service>
         </authentication-provider> 
     </authentication-manager>
