@@ -10,6 +10,7 @@
 		<param-value>
 		classpath:spring/spring-context1.xml
 		classpath:spring/spring-context2.xml
+		classpath:datasource.xml
 		classpath:spring-security.xml
 		</param-value>
 	</context-param>
