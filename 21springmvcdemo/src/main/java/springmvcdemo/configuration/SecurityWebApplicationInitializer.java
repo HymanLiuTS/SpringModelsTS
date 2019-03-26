@@ -1,4 +1,4 @@
-package springmvcdemo.config;
+package springmvcdemo.configuration;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
