@@ -5,13 +5,13 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the users database table.
+ * The persistent class for the groups database table.
  * 
  */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+@Table(name="groups")
+@NamedQuery(name="Group.findAll", query="SELECT g FROM Group g")
+public class Group implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,11 +21,9 @@ public class User implements Serializable {
 
 	private Boolean enabled;
 
-	private String password;
+	private String groupname;
 
-	private String username;
-
-	public User() {
+	public Group() {
 	}
 
 	public Integer getId() {
@@ -52,20 +50,12 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public String getPassword() {
-		return this.password;
+	public String getGroupname() {
+		return this.groupname;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setGroupname(String groupname) {
+		this.groupname = groupname;
 	}
 
 }

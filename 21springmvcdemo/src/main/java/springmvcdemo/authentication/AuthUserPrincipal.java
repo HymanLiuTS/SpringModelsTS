@@ -24,7 +24,7 @@ public class AuthUserPrincipal implements UserDetails {
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<AuthGrantedAuthority> list=new ArrayList<AuthGrantedAuthority>();
-		String authorities = this.user.getRole();
+		String authorities = this.user.getAuthorities();
 		if (authorities != null && authorities.isEmpty() == false) {
 			String[] auths = authorities.split(",");
 			for(int i=0;i<auths.length;i++){

@@ -1,4 +1,4 @@
-package springmvcdemo.contoller;
+package springmvcdemo.helloworld.contoller;
 
 import java.util.List;
 
