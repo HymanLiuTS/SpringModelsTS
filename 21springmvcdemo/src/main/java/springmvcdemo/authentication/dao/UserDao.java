@@ -2,6 +2,8 @@ package springmvcdemo.authentication.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import springmvcdemo.authentication.model.User;
 
 public interface UserDao {

@@ -23,7 +23,6 @@ public class UserDaoImpl implements UserDao {
 	@PersistenceContext
 	protected EntityManager entityManager;
 
-	@Override
 	public List<User> findAllUsers() {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
@@ -34,7 +33,6 @@ public class UserDaoImpl implements UserDao {
 		return entityManager.createQuery(criteriaQuery).setFlushMode(FlushModeType.COMMIT).getResultList();
 	}
 
-	@Override
 	public User findByUsername(String userName) {
 		Query query = entityManager.createQuery("from User where username=?");
 		query.setParameter(1, userName);
@@ -44,7 +42,6 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	@Override
 	public User insertUser(User user) {
 		try {
 			entityManager.persist(user);
@@ -54,7 +51,6 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
-	@Override
 	public User deleteUser(String userName) {
 		
 		return null;

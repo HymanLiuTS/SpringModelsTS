@@ -23,11 +23,14 @@ import springmvcdemo.authentication.service.UserService;
 @Controller
 public class HelloWorldController {
 
-	
+	@Autowired
+	@Qualifier("userService")
+    private UserService userService;
 	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to mysite");
+		List<User> users = userService.findAllUsers();
 		return "welcome";
 	}
 

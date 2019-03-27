@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import springmvcdemo.authentication.dao.UserDao;
 import springmvcdemo.authentication.model.User;
+import springmvcdemo.repository.UserRepository;
 
 @Transactional
 @Service("userService")
@@ -20,9 +21,12 @@ public class UserService{
 	@Qualifier("userDaoImpl")
     private UserDao userDao;
 
+	@Autowired
+	@Qualifier("userRepository")
+	private UserRepository userRepository;
+	
 	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		 return userDao.findAllUsers();
+		 return (List<User>) userRepository.findAll();
 	}
 	
 	public User findByUsername(String userName) {
