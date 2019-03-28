@@ -1,15 +1,14 @@
-package springmvcdemo.configuration;
+package springmvcdemo.authentication.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import springmvcdemo.authentication.service.AuthUserDetailsService;
 
@@ -35,12 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  http.authorizeRequests()
 	  	.antMatchers("/").permitAll()
 	  	.antMatchers("/home").permitAll()
+	  	.antMatchers("/user/**").access("hasRole('ADMIN')")
 	  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
 	  	.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 	  	.and().formLogin().loginPage("/login")
 	  	.usernameParameter("ssoId").passwordParameter("password")
-	  	.and().csrf()
-	  	.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+	  	.and().exceptionHandling().accessDeniedPage("/Access_Denied")
+	  	.and().csrf().disable();
 	}
 	
 	@Bean
@@ -53,8 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public PasswordEncoder encoder() {
-	    return new Md5PasswordEncoder();
+	public BCryptPasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
 	}
 
 }

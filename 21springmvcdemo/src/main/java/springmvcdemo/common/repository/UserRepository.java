@@ -1,4 +1,4 @@
-package springmvcdemo.repository;
+package springmvcdemo.common.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +10,5 @@ import springmvcdemo.authentication.model.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User,Long>{
 
+	
 }

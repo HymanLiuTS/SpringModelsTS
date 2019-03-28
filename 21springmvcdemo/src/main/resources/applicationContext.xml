@@ -36,7 +36,7 @@
 		</property>
 	</bean>
 	
-	<jpa:repositories base-package="springmvcdemo.repository" 
+	<jpa:repositories base-package="springmvcdemo.common.repository" 
                                  entity-manager-factory-ref="entityManagerFactory"
                                  transaction-manager-ref="transactionManager"></jpa:repositories>
 

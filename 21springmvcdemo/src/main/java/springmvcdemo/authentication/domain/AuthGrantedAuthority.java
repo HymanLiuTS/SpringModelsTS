@@ -1,4 +1,4 @@
-package springmvcdemo.authentication;
+package springmvcdemo.authentication.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 

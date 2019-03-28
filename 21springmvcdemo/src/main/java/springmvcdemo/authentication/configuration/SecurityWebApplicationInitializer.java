@@ -1,4 +1,4 @@
-package springmvcdemo.configuration;
+package springmvcdemo.authentication.configuration;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

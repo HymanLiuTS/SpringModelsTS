@@ -1,4 +1,4 @@
-package springmvcdemo.authentication;
+package springmvcdemo.authentication.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
