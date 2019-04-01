@@ -3,22 +3,21 @@ package springmvcdemo.authentication.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the group_user_map database table.
  * 
  */
 @Entity
-@Table(name="group_user_map")
-@NamedQuery(name="GroupUserMap.findAll", query="SELECT g FROM GroupUserMap g")
+@Table(name = "group_user_map")
+@NamedQuery(name = "GroupUserMap.findAll", query = "SELECT g FROM GroupUserMap g")
 public class GroupUserMap implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@Column(name="group_id")
+	@Column(name = "group_id")
 	private Long groupId;
 
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private Long userId;
 
 	public GroupUserMap() {
@@ -40,4 +39,8 @@ public class GroupUserMap implements Serializable {
 		this.userId = userId;
 	}
 
+	public GroupUserMap(Long groupId, Long userId) {
+		this.userId = userId;
+		this.groupId = groupId;
+	}
 }
