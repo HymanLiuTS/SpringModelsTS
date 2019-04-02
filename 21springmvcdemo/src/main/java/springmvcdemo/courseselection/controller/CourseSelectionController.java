@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import springmvcdemo.authentication.model.User;
 import springmvcdemo.authentication.service.UserService;
+import springmvcdemo.business.model.Student;
 import springmvcdemo.common.domain.Result;
-import springmvcdemo.courseselection.model.Student;
 import springmvcdemo.courseselection.service.CourseSelectionService;
 
 @Controller

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import springmvcdemo.authentication.model.User;
+import springmvcdemo.authentication.repository.UserRepository;
+import springmvcdemo.business.model.Student;
+import springmvcdemo.business.repository.StudentRepository;
 import springmvcdemo.common.domain.Result;
-import springmvcdemo.common.repository.StudentRepository;
-import springmvcdemo.common.repository.UserRepository;
-import springmvcdemo.courseselection.model.Student;
 
 @Service("courseSelectionService")
 public class CourseSelectionService {

@@ -1,4 +1,4 @@
-package springmvcdemo.common.repository;
+package springmvcdemo.authentication.repository;
 
 import java.util.List;
 

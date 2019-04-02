@@ -14,9 +14,9 @@ import springmvcdemo.authentication.dao.UserDao;
 import springmvcdemo.authentication.model.Group;
 import springmvcdemo.authentication.model.GroupUserMap;
 import springmvcdemo.authentication.model.User;
-import springmvcdemo.common.repository.GroupRepository;
-import springmvcdemo.common.repository.GroupUserMapRepository;
-import springmvcdemo.common.repository.UserRepository;
+import springmvcdemo.authentication.repository.GroupRepository;
+import springmvcdemo.authentication.repository.GroupUserMapRepository;
+import springmvcdemo.authentication.repository.UserRepository;
 
 @Service("userService")
 public class UserService {

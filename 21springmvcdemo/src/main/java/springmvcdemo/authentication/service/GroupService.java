@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import springmvcdemo.authentication.model.Group;
-import springmvcdemo.common.repository.GroupRepository;
+import springmvcdemo.authentication.repository.GroupRepository;
 
 
 

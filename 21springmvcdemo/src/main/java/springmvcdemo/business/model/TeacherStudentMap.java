@@ -1,4 +1,4 @@
-package springmvcdemo.courseselection.model;
+package springmvcdemo.business.model;
 
 import java.io.Serializable;
 import javax.persistence.*;

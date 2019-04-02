@@ -20,7 +20,7 @@ import springmvcdemo.authentication.model.User;
 @Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="authEntityManagerFactory")
 	protected EntityManager entityManager;
 
 	public List<User> findAllUsers() {

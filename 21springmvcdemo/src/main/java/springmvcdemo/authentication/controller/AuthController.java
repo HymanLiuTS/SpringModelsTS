@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import springmvcdemo.authentication.model.Group;
 import springmvcdemo.authentication.model.GroupUserMap;
 import springmvcdemo.authentication.model.User;
+import springmvcdemo.authentication.repository.GroupRepository;
 import springmvcdemo.authentication.service.GroupService;
 import springmvcdemo.authentication.service.UserService;
 import springmvcdemo.common.domain.Result;
-import springmvcdemo.common.repository.GroupRepository;
 
 @Controller
 public class AuthController {
