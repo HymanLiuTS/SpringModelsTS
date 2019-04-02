@@ -8,7 +8,8 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "group_user_map")
+@Table(name = "group_user_map", uniqueConstraints = {
+		@UniqueConstraint(name = "gid_uid_un", columnNames = { "group_id", "user_id" }) })
 @NamedQuery(name = "GroupUserMap.findAll", query = "SELECT g FROM GroupUserMap g")
 public class GroupUserMap implements Serializable {
 	private static final long serialVersionUID = 1L;

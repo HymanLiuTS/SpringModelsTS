@@ -3,21 +3,21 @@ package springmvcdemo.courseselection.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the teacher_student_map database table.
  * 
  */
 @Entity
-@Table(name="teacher_student_map")
-@NamedQuery(name="TeacherStudentMap.findAll", query="SELECT t FROM TeacherStudentMap t")
+@Table(name = "teacher_student_map")
+@NamedQuery(name = "TeacherStudentMap.findAll", query = "SELECT t FROM TeacherStudentMap t")
 public class TeacherStudentMap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="student_id")
+	@Id
+	@Column(name = "student_id")
 	private Long studentId;
 
-	@Column(name="teacher_id")
+	@Column(name = "teacher_id")
 	private Long teacherId;
 
 	public TeacherStudentMap() {

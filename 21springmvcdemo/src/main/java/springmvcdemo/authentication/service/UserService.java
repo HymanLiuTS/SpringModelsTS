@@ -69,8 +69,8 @@ public class UserService {
 	}
 	
 	@Transactional
-	public List<String> findAllAuthorities(Integer id){
-		return (List<String>) userRepository.findAllAuthorities(id);
+	public String[] findAllAuthorities(Integer id){
+		return userRepository.findAllAuthorities(id);
 	}
 
 }

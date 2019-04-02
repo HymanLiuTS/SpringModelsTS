@@ -83,7 +83,7 @@ public class AuthController {
 	public Result getAuthorities(Integer id) {
 		Result result=new Result(true,"",null);
 		try{
-			List<String> auths=userService.findAllAuthorities(id);
+			String[] auths=userService.findAllAuthorities(id);
 			result.setData(auths);
 		}catch(Exception ex){
 			result.setSucceed(false);

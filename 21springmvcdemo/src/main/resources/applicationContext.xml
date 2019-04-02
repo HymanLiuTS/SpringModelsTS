@@ -25,7 +25,7 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 设定为自动扫描，spring新特性，有了packagesToScan，我们不再需要自己动手去实现实体类的扫描了 -->
-		<property name="packagesToScan" value="springmvcdemo.authentication" />
+		<property name="packagesToScan" value="springmvcdemo" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
