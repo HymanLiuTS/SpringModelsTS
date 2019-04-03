@@ -11,6 +11,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import springmvcdemo.authentication.model.User;
 import springmvcdemo.authentication.service.GroupService;
@@ -50,14 +52,12 @@ public class AuthControllerTest extends ControllerBaseTest {
 	@Test
 	public void addUserTest() throws Exception {
 		User user=new User(1, "hyman", "123", "ADMIN", true);
-		Result result=new Result(true,"",user);
-		
+		Result result=new Result(true,"",Arrays.asList(user));
 		when(userService.findAllUsers()).thenReturn(Arrays.asList(user));
-		
 		this.mockMvc.perform(get("/user"))
 		.andDo(print())
 		.andExpect(status().isOk())
-		.andExpect(content().json(JSON.toJSONString(result)));
+		.andExpect(content().json(JSONObject.toJSONString(result)));
 	}
 
 }

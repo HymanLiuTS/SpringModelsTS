@@ -106,7 +106,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.8</version>
 		</dependency>
-		<!-- junit单元测试 相关依赖-->
+		<!-- junit单元测试 相关依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -117,6 +117,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.26</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- 构建单元测试环境工具mockito -->
@@ -138,10 +144,18 @@
 			<version>1.5.0</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>springmvcdemo</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 	<repositories>
 		<repository>
