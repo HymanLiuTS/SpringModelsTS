@@ -1,4 +1,4 @@
-package springmvcdemo.authentication;
+package springmvcdemo.authentication.service;
 
 import static org.junit.Assert.*;
 

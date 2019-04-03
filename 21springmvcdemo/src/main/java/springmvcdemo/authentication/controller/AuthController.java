@@ -46,8 +46,16 @@ public class AuthController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String user() {
-		return "user";
+	@ResponseBody
+	public Result findAllUsers() {
+		Result result = new Result(true, "", null);
+		try {
+			result.setData(this.userService.findAllUsers());
+		} catch (Exception ex) {
+			result.setSucceed(false);
+			result.setMsg(ex.getMessage());
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/group", method = RequestMethod.POST)
