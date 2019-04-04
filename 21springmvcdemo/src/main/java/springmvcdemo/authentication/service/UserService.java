@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +23,10 @@ import springmvcdemo.authentication.repository.UserRepository;
 @Service("userService")
 public class UserService {
 
+	//static Logger logger = LogManager.getRootLogger();
+	protected final Log logger = LogFactory.getLog(getClass());
+
+
 	@Autowired
 	@Qualifier("userDaoImpl")
 	private UserDao userDao;
@@ -28,15 +34,15 @@ public class UserService {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	@Qualifier("groupRepository")
 	private GroupRepository groupRepository;
-	
+
 	@Autowired
 	@Qualifier("groupUserMapRepository")
 	private GroupUserMapRepository groupUserMapRepository;
-	
+
 	@Autowired
 	BCryptPasswordEncoder encoder;
 
@@ -45,6 +51,7 @@ public class UserService {
 	}
 
 	public User findByUsername(String userName) {
+		logger.info("userName:" + userName);
 		return userRepository.findByUsername(userName);
 	}
 
@@ -54,22 +61,22 @@ public class UserService {
 		user.setPassword(encoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
-	
+
 	@Transactional
-	public GroupUserMap putUserToGroup(String userName,String groupName) throws Exception{
-		User user=userRepository.findByUsername(userName);
-		if(user==null)
+	public GroupUserMap putUserToGroup(String userName, String groupName) throws Exception {
+		User user = userRepository.findByUsername(userName);
+		if (user == null)
 			throw new Exception("找不到该用户");
-		Group group=groupRepository.findByGroupnameEquals(groupName);
-		if(group==null)
+		Group group = groupRepository.findByGroupnameEquals(groupName);
+		if (group == null)
 			throw new Exception("找不到该用户组");
-		
-		GroupUserMap map=new GroupUserMap(group.getId().longValue(),user.getId().longValue());
+
+		GroupUserMap map = new GroupUserMap(group.getId().longValue(), user.getId().longValue());
 		return groupUserMapRepository.save(map);
 	}
-	
+
 	@Transactional
-	public String[] findAllAuthorities(Integer id){
+	public String[] findAllAuthorities(Integer id) {
 		return userRepository.findAllAuthorities(id);
 	}
 
