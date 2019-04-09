@@ -19,6 +19,7 @@ public class UserRepositoryTest extends ControllerBaseTest {
 	public void findByUsernameTest() {
 		User user = userRepository.findByUsername("admin");
 		assertTrue(user!=null);
+		assertEquals(user.getUsername(),"admin");
 	}
 
 }
