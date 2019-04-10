@@ -17,7 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import springmvcdemo.authentication.model.User;
 import springmvcdemo.authentication.service.GroupService;
 import springmvcdemo.authentication.service.UserService;
-import springmvcdemo.common.domain.ControllerBaseTest;
+import springmvcdemo.common.domain.WebAppContextBaseTest;
 import springmvcdemo.common.domain.Result;
 
 import static org.hamcrest.Matcher.*;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AuthControllerTest extends ControllerBaseTest {
+public class AuthControllerTest extends WebAppContextBaseTest {
 
 	@Mock
 	private UserService userService;

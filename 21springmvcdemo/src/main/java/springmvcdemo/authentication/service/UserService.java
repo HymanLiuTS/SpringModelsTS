@@ -71,7 +71,7 @@ public class UserService {
 		if (group == null)
 			throw new Exception("找不到该用户组");
 
-		GroupUserMap map = new GroupUserMap(group.getId().longValue(), user.getId().longValue());
+		GroupUserMap map = new GroupUserMap(group.getId().longValue(), user.getId());
 		return groupUserMapRepository.save(map);
 	}
 

@@ -1,6 +1,8 @@
 package springmvcdemo.authentication.model;
 
 import java.io.Serializable;
+
+
 import javax.persistence.*;
 
 /**
@@ -9,13 +11,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "users")
+@Cacheable(value=true)
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private long id;
 
 	private String authorities;
 
@@ -36,11 +39,11 @@ public class User implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
