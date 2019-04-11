@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,10 +22,7 @@ public class UserRepositoryTest extends WebAppContextBaseTest {
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
-	@Autowired
-	@Qualifier("cacheManager")
-	private CacheManager cacheManager;
-
+	
 
 	@Test
 	public void findByUsernameTest() {
@@ -32,14 +31,7 @@ public class UserRepositoryTest extends WebAppContextBaseTest {
 		assertEquals(user.getUsername(), "admin");
 	}
 
-	@Test
-	public void findAllAuthoritiesTest() {
-		Cache cache=cacheManager.getCache("sampleCache1");
-		String name=cache.getName();
-		Optional<User> user1 = userRepository.findById((long) 1);
-		Optional<User> user2 = userRepository.findById((long) 1);
-		assertTrue(user1 != null);
-		assertTrue(user2 != null);
-	}
+	
 
+	
 }

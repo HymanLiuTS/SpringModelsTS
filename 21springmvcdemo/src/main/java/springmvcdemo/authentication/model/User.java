@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 
 import javax.persistence.*;
-
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * The persistent class for the users database table.
  * 
  */
 @Entity
 @Table(name = "users")
-@Cacheable(value=true)
+//@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY,region="sampleCache1")   //　　表示开启二级缓存，并使用read-only策略
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -16,7 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 // @ContextConfiguration(classes = {WebMvcConfig.class, MockDataConfig.class})
 @ContextConfiguration(locations = { "classpath:springmvc-servlet.xml", "classpath:applicationContext.xml",
-		"classpath:datasource.xml"})
+		"classpath:hibernate/datasource.xml","classpath:hibernate/authhibernate.xml","classpath:hibernate/bueinesshibernate.xml"})
 public class WebAppContextBaseTest {
 
 	@Autowired
