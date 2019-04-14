@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
 
 
-public class EcacheTest {
+public class SpringCacheTest {
 
 	@Autowired
 	@Qualifier("cacheManager")
